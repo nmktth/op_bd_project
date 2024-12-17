@@ -1,0 +1,67 @@
+:root {
+    --background-color: #001A34;
+    --font-size-base: 62.5%;
+    --primary-color: #0050E0;
+    --background-twice: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.inter-uniquifier {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+  }
+
+html {
+    font-size: var(--font-size-base);
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    font-size: 1.2rem;
+    background-color: rgba(0, 26, 52, 0.1);
+}
+
+header {
+    height: 84px;
+    background-color: var(--background-twice);
+    display: flex;
+    justify-content: center;
+}
+
+#submit {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    all: unset;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--background-twice);
+    height: 57px;
+    width: 229px;
+    border-radius: 15px;
+    border-width: 3px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3.2rem;
+}
+
+#add_product_form {
+    display: flex;
+    align-items: center;
+    gap: 84px;
+}
+
+#add_input {
+    outline: none;
+    width: 959px;
+    height: 57px;
+    border-radius: 15px;
+    border-width: 3px;
+    border-color: var(--primary-color);
+    font-weight: 100;
+    font-size: 2.4rem;
+}
