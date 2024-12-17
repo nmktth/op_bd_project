@@ -1,3 +1,4 @@
+<!-- products/templates/add_product.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +27,23 @@
             {% if price %}
                 <p>Цена товара: {{ price }}</p>
             {% endif %}
+
+            {% if product %}
+                <h2>Добавленный товар:</h2>
+                <p>Название: {{ product.name }}</p>
+                <p>Цена: {{ product.price }}</p>
+            {% endif %}
+
+            <h2>Все добавленные товары:</h2>
+            {% for p in all_products %}
+                <div class="product">
+                    <p><strong>Название:</strong> {{ p.name }}</p>
+                    <p><strong>Цена:</strong> {{ p.price }}</p>
+                    <p><strong>URL:</strong> <a href="{{ p.url }}" target="_blank">{{ p.url }}</a></p>
+                </div>
+            {% empty %}
+                <p>Пока нет добавленных товаров.</p>
+            {% endfor %}
         </section>
     </main>
 </body>
