@@ -20,19 +20,16 @@
                 <label for="ozon">
                     <input id="add_input" type="text" name="ozon" id="ozon" placeholder="Ввод ссылки озон товара">
                 </label>
-                <button type="submit" id="submit">Add product</button>
+                <button type="submit" id="submit">Добавить</button>
             </form>
         </header>
-
+        {% if product %}
+        <h2>Добавленный товар:</h2>
+        <p>Название: {{ product.name }}</p>
+        <p>Цена: {{ product.price }}</p>
+        {% endif %}
         <section class="products">
-            {% if product %}
-                <h2>Добавленный товар:</h2>
-                <p>Название: {{ product.name }}</p>
-                <p>Цена: {{ product.price }}</p>
-            {% endif %}
-
             {% for p in all_products %}
-            <div id="products">
                 <div class="product">
                     <strong>Название товара:</strong>
                     <p class="product_name" title="{{ p.name }}"><a href="{{ p.url }}" target="_blank">{{ p.name }}</a></p>
@@ -49,9 +46,8 @@
                         <button type="submit" id="accept"><svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 26.5L25 46.5L50 5" stroke="white" stroke-width="10" stroke-linecap="round"/></svg></button>
                     </form>
                     <strong class="procent_minus procent_plus zero_procent">{}</strong>
-                    <button type="submit" id="delete">Delete</button>
+                    <button type="submit" id="delete">Удалить</button>
                 </div>
-            </div>
             {% empty %}
                 <p>Пока нет добавленных товаров.</p>
             {% endfor %}
