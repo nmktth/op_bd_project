@@ -3,6 +3,9 @@
     --font-size-base: 62.5%;
     --primary-color: #0050E0;
     --background-twice: #FFFFFF;
+    --red-procent: #E54528;
+    --green-procent: #A9E58B;
+    --gray-procent: gray;
 }
 
 * {
@@ -20,9 +23,13 @@ html {
     font-size: var(--font-size-base);
 }
 
+p {
+    margin: 0;
+}
+
 body {
     font-family: "Inter", sans-serif;
-    font-size: 1.2rem;
+    font-size: 2.4rem;
     background-color: rgba(0, 26, 52, 0.1);
 }
 
@@ -49,6 +56,36 @@ header {
     font-size: 3.2rem;
 }
 
+#accept {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    all: unset;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    height: 57px;
+    width: 57px;
+    border-radius: 15px;
+    border-width: 3px;
+}
+
+#add_procent_form {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+#add_procent {
+    outline: none;
+    width: 210px;
+    height: 57px;
+    border-radius: 15px;
+    border-width: 3px;
+    border-color: var(--primary-color);
+    font-weight: bold;
+    font-size: 2.4rem;
+    text-align: center;
+}
+
 #add_product_form {
     display: flex;
     align-items: center;
@@ -64,4 +101,85 @@ header {
     border-color: var(--primary-color);
     font-weight: 100;
     font-size: 2.4rem;
+}
+
+#products {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-content: space-around;
+    row-gap: 60px;
+    margin-top: 60px;
+}
+
+.product {
+    display: flex;
+    height: 555px;
+    width: 335px;
+    background-color: var(--background-twice);
+    padding: 10px;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product_name {
+    display: inline-block;
+    width: 90%;
+    height: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.product_name a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.product_name a:focus, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.procent_plus {
+    font-size: 6.4rem;
+    margin: 20px 0;
+    color: var(--green-procent);
+}
+
+.procent_plus {
+    font-size: 6.4rem;
+    margin: 20px 0;
+    color: var(--green-procent);
+}
+
+.procent_minus {
+    font-size: 6.4rem;
+    margin: 20px 0;
+    color: var(--red-procent);
+}
+
+.zero_procent {
+    font-size: 6.4rem;
+    margin: 20px 0;
+    color: var(--gray-procent);
+}
+
+#delete {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    all: unset;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--background-twice);
+    height: 57px;
+    width: 215px;
+    border-radius: 15px;
+    border-width: 3px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3.2rem;
 }

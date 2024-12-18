@@ -25,24 +25,33 @@
         </header>
 
         <section class="products">
-            {% if price %}
-                <p>Цена товара: {{ price }}</p>
-            {% endif %}
-
             {% if product %}
                 <h2>Добавленный товар:</h2>
                 <p>Название: {{ product.name }}</p>
                 <p>Цена: {{ product.price }}</p>
             {% endif %}
 
-            <h2>Все добавленные товары:</h2>
             {% for p in all_products %}
+            <div id="products">
                 <div class="product">
-                    <hr>
-                    <p><strong>Название:</strong> {{ p.name }}</p>
-                    <p><strong>Цена:</strong> {{ p.price }}</p>
-                    <p><strong>URL:</strong> <a href="{{ p.url }}" target="_blank">{{ p.url }}</a></p>
+                    <strong>Название товара:</strong>
+                    <p class="product_name" title="{{ p.name }}"><a href="{{ p.url }}" target="_blank">{{ p.name }}</a></p>
+                    <strong>Начальная цена:</strong>
+                    <p>{{ p.price }}</p>
+                    <strong>При последней проверке:</strong>
+                    <p>{{ p.price }}</p>
+                    <strong>Купить при падении на:</strong>
+                    <form id="add_procent_form" method="POST">
+                        {% csrf_token %}
+                        <label for="procent">
+                            <input id="add_procent" type="text" name="procent" id="procent" placeholder="%">
+                        </label>
+                        <button type="submit" id="accept"><svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 26.5L25 46.5L50 5" stroke="white" stroke-width="10" stroke-linecap="round"/></svg></button>
+                    </form>
+                    <strong class="procent_minus procent_plus zero_procent">{}</strong>
+                    <button type="submit" id="delete">Delete</button>
                 </div>
+            </div>
             {% empty %}
                 <p>Пока нет добавленных товаров.</p>
             {% endfor %}
