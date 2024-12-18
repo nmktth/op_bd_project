@@ -1,0 +1,6 @@
+from parser import Parser
+
+p = Parser()
+
+
+print(p.url("https://www.ozon.ru/product/digma-512-gb-vnutrenniy-ssd-disk-sata-iii-run-p1-dgsr2512gp13t-720579103/?_bctx=CAYQ2upu&advert=ABEBJet75PoXNgx7JiamuUV-sXxrHvStWgbTnVCNU0zHu7Kklz-qq1rsk7Q-G6wEroyczQwYHa3NoYfR47nQYY-vXKXdQroZuYHGZ-C2Uovn7qtzPxhyyx-oJZ8CKb7tj2clhMCih8s3VDqgIRAk_j6xTeHQob3XCrBQ1m2XM5p4kISCI1UB2uHUh4ZVnESGN1Q5IBulFLQSX2t1dcvJ_pTDYl1tip-Zwm6CbfKPJ71gHvoJ8jx9c_-sWn7gihjeJjp6GH7ykWRt11gaPf80wXRNMlCLz3trAE3-Aw-zyCRvwYm6uUfvPiFsISlC0cXmpqctNDm4eTGqm164jEe8EFE2HXzhm7zklRYRbssOoqi8sWE54qVr1f7vRrz9lDhkSFcEL1QRs3ESnqh8xvJXXhirQQc&avtc=1&avte=4&avts=1734466323"))
