@@ -16,7 +16,7 @@ class Parser:
     def __init__(self):
         options = Options()
         options.add_argument("--log-level=3")
-        options.add_argument("--user-data-dir=C:\\Users\\hecke\AppData\\Local\\Google\Chrome\\User Data")
+        options.add_argument("--user-data-dir=C:\\Users\\Артём Ильин\AppData\\Local\\Google\Chrome\\User Data")
         options.add_argument("--profile-directory=Default")
 
         # Укажи путь к Chrome, если он не добавлен в системный путь
@@ -104,4 +104,4 @@ class Parser:
                 
 
 
-            time.sleep(1800)
+            time.sleep(5)
