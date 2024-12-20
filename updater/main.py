@@ -1,3 +1,4 @@
+import os
 import re
 import json
 import time
@@ -11,12 +12,35 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+
+paths = {
+    'prices': [
+        '//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span',
+        '//*[@id="layoutPage"]/div[1]/div[3]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span',
+        '//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div[2]/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span',
+        '//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span',
+        '//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div[3]/div[1]/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span',
+        '//*[@id="layoutPage"]/div[1]/div[3]/div[3]/div[2]/div/div/div[1]/div[2]/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span',
+        '//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[1]/div/div/div[1]/div/div/div[1]/span[1]'
+        
+        ],
+    'add': [
+        '//*[@id="layoutPage"]/div[1]/div[3]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[4]/div/div/div[1]/div/div/div/div[1]/button',
+        '//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div[3]/div[1]/div[4]/div/div/div[1]/div/div/div/div[1]/button',
+        '//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div/div/div[4]/div/div/div[1]/div/div/div/div[1]/button'
+    ]
+    
+}
+
+
 class Parser:
     
     def __init__(self):
         options = Options()
         options.add_argument("--log-level=3")
-        options.add_argument("--user-data-dir=C:\\Users\\Артём Ильин\AppData\\Local\\Google\Chrome\\User Data")
+        options.add_argument("--disable-webgl")
+        options.add_argument("--disable-permissions-api")
+        options.add_argument(f"--user-data-dir=C:\\Users\\{os.getlogin()}\AppData\\Local\\Google\Chrome\\User Data")
         options.add_argument("--profile-directory=Default")
 
         # Укажи путь к Chrome, если он не добавлен в системный путь
@@ -27,50 +51,45 @@ class Parser:
         
     def check_exists(self, xpath):
         try:
-            self.driver.find_element(By.XPATH, xpath)
+            el = self.driver.find_element(By.XPATH, xpath)
         except NoSuchElementException:
-            return False
-        return True
+            return None
+        return el
         
     def url(self, url):
         self.driver.get(url)
         
         
         def is_loaded():
-            if not self.check_exists('//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span'):
-                if not self.check_exists('//*[@id="layoutPage"]/div[1]/div[3]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span'):
-                    return False
+            for price in paths['prices']:
+                if self.check_exists(price):
+                    return True
             return True
 
-
-        try:
+        if not is_loaded():
+            self.driver.implicitly_wait(2)
             if not is_loaded():
-                self.driver.implicitly_wait(1)
-                if not is_loaded():
-                    self.driver.refresh()
+                self.driver.refresh()
+        
+        time.sleep(5)
+        
 
-                    # Подождем некоторое время, чтобы страница обновилась
-                    self.driver.implicitly_wait(2)
-            
-            
-            
-            # Ищем элемент с ценой
-            try:
-                price_element = self.driver.find_element(By.XPATH, '//*[@id="layoutPage"]/div[1]/div[4]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span')  # Убедись, что это правильный класс для цены
-            except:
-                price_element = self.driver.find_element(By.XPATH, '//*[@id="layoutPage"]/div[1]/div[3]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[1]/div/div/div[1]/div[1]/button/span/div/div[1]/div/div/span')
+        check = self.check_exists('//*[@id="reload-button"]')
+        if check is not None: 
+            self.driver.refresh()
+        
+        # Ищем элемент с ценой
+        for path in paths['prices']:
+            price_element = self.check_exists(path)
+            if price_element is not None: break
 
 
-            # Извлекаем цену и убираем все символы, кроме цифр
-            price_text = price_element.text.strip()
-            price = re.sub(r'\D', '', price_text)
-            
-            return price
-        except Exception as e:
-            return e
-        finally:
-            # self.driver.close()
-            pass
+
+        # Извлекаем цену и убираем все символы, кроме цифр
+        price_text = price_element.text.strip()
+        price = re.sub(r'\D', '', price_text)
+        
+        return price
     
     
     def loop(self):
@@ -93,15 +112,20 @@ class Parser:
                 percent = float(prod['percent'])
                 
                 if cur_percent >= percent:
-                
-                    if not self.check_exists('//*[@id="layoutPage"]/div[1]/div[3]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[4]/div/div/div[1]/div/div/div/div[1]/button/div[2]'):
-                        print("NOT LOGGED IN?\n"*10)
-                    else:
-                        self.driver.find_element(By.XPATH, '//*[@id="layoutPage"]/div[1]/div[3]/div[3]/div[2]/div/div/div[1]/div[3]/div/div[4]/div/div/div[1]/div/div/div/div[1]/button/div[2]').click()
-                        print("ADDED")
-                        requests.get("http://127.0.0.1:8000/delete", params={"url": product["url"]})
+                    
+                    for path in paths['add']:
+                        el = self.check_exists(path)
+                        if el: break
+                        
+                    if not el:
+                        print("NO\n" * 10)
+                        return
+                    
+                    el.click()
+                    print("ADDED")
+                    requests.get("http://127.0.0.1:8000/delete", params={"url": product["url"]})
 
                 
 
 
-            time.sleep(5)
+            time.sleep(10)
