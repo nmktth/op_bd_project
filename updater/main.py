@@ -128,4 +128,4 @@ class Parser:
                 
 
 
-            time.sleep(10)
+            time.sleep(1800)
