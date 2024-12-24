@@ -52,6 +52,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="url" value="{{ product.url }}">
+
                         <button type="submit" id="delete">Удалить</button>
                     </form>
                 </div>

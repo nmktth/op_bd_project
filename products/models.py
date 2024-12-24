@@ -21,6 +21,8 @@ class Product(models.Model):
     def to_dict(self):
         return {
             'url': self.url,
+            'name': self.name,
+
             'price': str(self.price),  # Конвертируем цену в строку для JSON
             'percent': self.percent,
             'cur_percent': self.cur_percent

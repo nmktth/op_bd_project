@@ -54,19 +54,43 @@ header {
     text-align: center;
     font-weight: bold;
     font-size: 3.2rem;
+    border: 2px solid var(--primary-color);
+	transition: all .4s ease 0s;
 }
 
 #accept {
     background-color: var(--primary-color);
-    border-color: var(--primary-color);
     all: unset;
     cursor: pointer;
     background-color: var(--primary-color);
     height: 57px;
     width: 57px;
     border-radius: 15px;
-    border-width: 3px;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
+#accept:hover {
+    transform: scale(1.1); /* Увеличение размера кнопки */
+    background-color: var(--green-procent); /* Изменение цвета на акцентный */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Добавляем тень */
+}
+
+
+#delete {
+    background-color: var(--primary-color);
+    cursor: pointer;
+    color: var(--background-twice);
+    height: 57px;
+    width: 215px;
+    border-radius: 15px;
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3.2rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
 
 #add_procent_form {
     display: flex;
@@ -161,16 +185,10 @@ header {
     color: var(--green-procent);
 }
 
-.procent_plus {
-    font-size: 6.4rem;
-    margin: 20px 0;
-    color: var(--red-procent);
-}
-
 .procent_minus {
     font-size: 6.4rem;
     margin: 20px 0;
-    color: var(--green-procent);
+    color: var(--red-procent);
 }
 
 .zero_procent {
@@ -179,18 +197,37 @@ header {
     color: var(--gray-procent);
 }
 
+
+
+@keyframes blink {
+    50% {
+    opacity: 0;
+    }
+}
+
+
 #delete {
     background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    all: unset;
     cursor: pointer;
-    background-color: var(--primary-color);
     color: var(--background-twice);
     height: 57px;
     width: 215px;
     border-radius: 15px;
-    border-width: 3px;
+    border: none;
     text-align: center;
     font-weight: bold;
     font-size: 3.2rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#delete:hover {
+    transform: scale(1.1);
+    background-color: var(--red-procent);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+#submit:hover {
+	background-color: white;
+	color: var(--primary-color);
 }
