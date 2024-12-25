@@ -41,7 +41,7 @@ class Parser:
     
     def __init__(self):
         self.token = "7624024176:AAH1sj-vmez_yH5syCBAQzOTRdn7OBfpkJk"
-        self.chats = [1395010208, 1119863499]
+        self.chats = [1395010208]
         
         options = Options()
         options.add_argument("--log-level=3")
