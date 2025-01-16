@@ -22,7 +22,7 @@
 1. Установите Python и необходимые библиотеки
 Убедитесь, что на вашем устройстве установлен Python версии 3.9 или выше. Затем выполните установку необходимых библиотек. Для этого откройте терминал (или командную строку) и выполните команды:
 
-## pip install django requests selenium webdriver_manager
+# pip install django requests selenium webdriver_manager
 
 2. Установите Google Chrome
 Проект использует Selenium для работы с браузером. Скачайте и установите последнюю версию Google Chrome с официального сайта.
